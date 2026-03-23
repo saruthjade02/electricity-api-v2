@@ -33,6 +33,26 @@ app.get("/api/users/total-by-year", (req, res) => {
   }, {});
   res.json(totals);
 });
+// 5. API: Usage history for a specific province
+app.get("/api/usage/history/:province", (req, res) => {
+    const { province } = req.params;
+    const data = loadData("electricity_usages_en.json");
+    const result = data.filter(
+      (d) => d.province_name.toLowerCase() === province.toLowerCase()
+    );
+    res.json(result);
+  });
+  // 6. API: User history for a specific province
+  app.get("/api/users/history/:province", (req, res) => {
+    const { province } = req.params;
+    const data = loadData("electricity_users_en.json");
+    const result = data.filter(
+      (d) => d.province_name.toLowerCase() === province.toLowerCase()
+    );
+    res.json(result);
+  });
+  app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+  
 // 3. API: Usage by province and year
 app.get("/api/usage/:province/:year", (req, res) => {
   const { province, year } = req.params;
@@ -53,22 +73,3 @@ app.get("/api/users/:province/:year", (req, res) => {
   );
   res.json(result || { message: "Data not found" });
 });
-// 5. API: Usage history for a specific province
-app.get("/api/usage/history/:province", (req, res) => {
-  const { province } = req.params;
-  const data = loadData("electricity_usages_en.json");
-  const result = data.filter(
-    (d) => d.province_name.toLowerCase() === province.toLowerCase()
-  );
-  res.json(result);
-});
-// 6. API: User history for a specific province
-app.get("/api/users/history/:province", (req, res) => {
-  const { province } = req.params;
-  const data = loadData("electricity_users_en.json");
-  const result = data.filter(
-    (d) => d.province_name.toLowerCase() === province.toLowerCase()
-  );
-  res.json(result);
-});
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
