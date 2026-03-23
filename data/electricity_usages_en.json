@@ -1,5 +1,4 @@
-{
-  "Sheet1": [
+[
     {
       "year": 2566,
       "province_code": 81,
@@ -3927,5 +3926,4 @@
       "temporary_electricity_kwh": 12820050.479999999,
       "ev_charging_kwh": 0
     }
-  ]
-}
+]
