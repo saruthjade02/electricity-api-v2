@@ -73,3 +73,11 @@ app.get("/api/users/:province/:year", (req, res) => {
   );
   res.json(result || { message: "Data not found" });
 });
+
+// ... [Keep all your existing code and routes from Step 5] ...
+// Change the bottom of index.js from app.listen(...) to this:
+if (process.env.NODE_ENV !== 'test') {
+    app.listen(PORT, () => console.log(`Server running on port
+   ${PORT}`));
+   }
+   module.exports = app; // Export for testing
